@@ -13,6 +13,11 @@ gcc -o envelop envelop.c
 ```bash
 ./envelop
 ```
+#### Hit
+```http://127.0.0.1:3000/hello```
+
+##### Add your own Routes
+See the Routes function.
 
 ## What is event-loop ?
 Its an infinite loop which looks for any available events and performs required action on them.
