@@ -1,7 +1,7 @@
 # envelop.c
 Thread-less, event-loop based toy http-server from scratch. This project focuses on practical implementation of EPOLL for learning purpose.
 
-<img src="https://github.com/flouthoc/envelop.c/blob/master/work.jpg" alt="drawing" width="250"/>
+<img src="https://github.com/flouthoc/envelop.c/blob/master/work.jpg" alt="drawing" width="350"/>
 
 ## Build
 
