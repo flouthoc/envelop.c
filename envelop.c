@@ -324,7 +324,7 @@ int main(){
 
 	events = calloc(MAXEVENTS, sizeof event);
 
-	/*evet-loop*/
+	/*event-loop*/
 	while (1){
 
 		/*wait for event_wait to return no of events which are ready to be processed*/ 
