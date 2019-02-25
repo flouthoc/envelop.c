@@ -333,7 +333,8 @@ int main(){
 
 			/* if event state is not the one we need skip this event */
 			if ((events[i].events & EPOLLERR) || (events[i].events & EPOLLHUP) ||(!(events[i].events & EPOLLIN))){
-				close (events[i].data.fd);
+				/* file descriptor is not yet connected for transport, can be closed without shutdown */
+				close(events[i].data.fd);
 				continue;
 			}
 			else if (listenfd == events[i].data.fd){
@@ -406,15 +407,21 @@ int main(){
 				strcpy(temp_buffer, msg_buffer);
 				if(!parse_http_request(&request_handle, temp_buffer)){
 					printf("Request Unparsablen\n");
-					//we have failed to parse client's request might wanna close this connection.
-					close(events[i].data.fd);
+					//we have failed to parse client's request might wanna shutdown this connection.
+					if (shutdown(events[i].data.fd, SHUT_RDWR) == -1){
+						perror("shutdown");
+					}
+
 					continue;
 				}
 				
 				//okay response to client
 				respond(request_handle, events[i].data.fd);
-				//close and free everything
-				close(events[i].data.fd);
+				//shutdown connection and free everything
+				if (shutdown(events[i].data.fd, SHUT_RDWR) == -1){
+					perror("shutdown");
+				}
+
 				free(request_handle->uri);
 				free(request_handle);
 				//printf("%s\n", temp_buffer); 
