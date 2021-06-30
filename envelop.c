@@ -217,7 +217,7 @@ static int parse_http_request(struct http_request **req, char *request_buffer) /
 
 	token_handler = strtok(NULL, " ");
 	if(!strncmp(token_handler, "HTTP/1.1\r\n", 10)) strcpy(p->version, VERSION_11);
-	else if(!strncmp(token_handler, "HTTP/1.1\r\n", 10)) strcpy(p->version, VERSION_10);
+	else if(!strncmp(token_handler, "HTTP/1.0\r\n", 10)) strcpy(p->version, VERSION_10);
 	else return 0;
 
 
